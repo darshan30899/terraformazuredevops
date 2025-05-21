@@ -12,10 +12,10 @@ pool:
 
 steps:
 - task: CmdLine@2
-  name: terraform init
+  name: init
   inputs:
     script: 'terraform init'
 - task: CmdLine@2
-  name: terraform apply
+  name: apply
   inputs:
     script: 'terraform apply -auto-approve'
