@@ -8,19 +8,11 @@ terraform {
 }
 
 provider "github" {
-  token = var.github_token
-  owner = var.github_owner
+  
+  # token is automatically read from the GITHUB_TOKEN env variable
 }
 
-variable "github_token" {
-  type      = string
-  sensitive = true
-}
 
-variable "github_owner" {
-  type    = string
-  default = "darshan30899"  # Replace with your GitHub username or org
-}
 
 resource "github_repository" "my_repo" {
   name        = "terraform-repo-testing"
