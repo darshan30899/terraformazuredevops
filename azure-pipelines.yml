@@ -21,7 +21,10 @@ steps:
   displayName: 'Terraform Plan'
 
 - script: |
-    echo "Terraform Apply"
+    echo "Testing GitHub token..."
     export GITHUB_TOKEN=$GITHUB_TOKEN
-    terraform apply -auto-approve
-  displayName: 'Terraform Apply'
+    curl -s -o response.json -w "%{http_code}" -H "Authorization: token $GITHUB_TOKEN" https://api.github.com/user
+    echo "GitHub API response:"
+    cat response.json
+  displayName: "🔍 Test GitHub Token"
+
