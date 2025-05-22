@@ -26,7 +26,7 @@ steps:
     curl -s -o response.json -w "%{http_code}" -H "Authorization: token $GITHUB_TOKEN" https://api.github.com/user
     echo "GitHub API response:"
     cat response.json
-  displayName: "🔍 Test GitHub Token"
+  displayName: " Test GitHub Token"
 
 - script: |
     echo "Terraform Apply"
