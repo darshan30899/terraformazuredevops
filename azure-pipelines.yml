@@ -8,10 +8,10 @@ pool:
 steps:
 - checkout: self
 
-- task: TerraformTaskV4@4
+- script: |
+    echo "Initializing Terraform"
+    terraform init
   displayName: 'Terraform Init'
-  inputs:
-    command: 'init'
 
 - script: |
     echo "Running Terraform Plan"
