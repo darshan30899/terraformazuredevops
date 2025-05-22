@@ -3,24 +3,25 @@ trigger:
 
 pool:
   name: New-agent
-  vmImage: New-agent  # Only if you've defined a self-hosted agent named this
+  vmImage: New-agent  # Make sure Terraform is installed on your self-hosted agent
 
 steps:
 - checkout: self
 
 - script: |
-    echo "Initializing Terraform"
+    echo "Terraform Init"
+    export GITHUB_TOKEN=$GITHUB_TOKEN
     terraform init
   displayName: 'Terraform Init'
 
 - script: |
-    echo "Running Terraform Plan"
+    echo "Terraform Plan"
     export GITHUB_TOKEN=$GITHUB_TOKEN
     terraform plan
   displayName: 'Terraform Plan'
 
 - script: |
-    echo "Running Terraform Apply"
+    echo "Terraform Apply"
     export GITHUB_TOKEN=$GITHUB_TOKEN
     terraform apply -auto-approve
   displayName: 'Terraform Apply'
