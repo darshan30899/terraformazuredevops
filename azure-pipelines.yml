@@ -28,3 +28,9 @@ steps:
     cat response.json
   displayName: "🔍 Test GitHub Token"
 
+- script: |
+    echo "Terraform Apply"
+    export GITHUB_TOKEN=$(GITHUB_TOKEN)
+    terraform apply -auto-approve
+  displayName: 'Terraform Apply'
+
