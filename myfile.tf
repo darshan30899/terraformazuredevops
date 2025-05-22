@@ -8,15 +8,12 @@ terraform {
 }
 
 provider "github" {
-  
-  # token is automatically read from the GITHUB_TOKEN env variable
+  # The GitHub token will be automatically read from the GITHUB_TOKEN environment variable
 }
-
-
 
 resource "github_repository" "my_repo" {
   name        = "terraform-repo-testing"
-  description = "Created with Terraform"
-  visibility  = "private"  # or "public"
-  auto_init   = true       # initializes the repo with a README
+  description = "Repository created with Terraform"
+  visibility  = "public"     # Change to "public" if you want it public
+  auto_init   = true          # Initializes the repo with a README
 }
