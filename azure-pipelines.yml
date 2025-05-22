@@ -1,21 +1,26 @@
-# Starter pipeline
-# Start with a minimal pipeline that you can customize to build and deploy your code.
-# Add steps that build, run tests, deploy, and more:
-# https://aka.ms/yaml
-
 trigger:
-- master
+- main
 
 pool:
   name: New-agent
-  vmImage: New-agent
+  vmImage: New-agent  # Only if you've defined a self-hosted agent named this
 
 steps:
-- task: CmdLine@2
-  name: init
+- checkout: self
+
+- task: TerraformTaskV4@4
+  displayName: 'Terraform Init'
   inputs:
-    script: 'terraform init'
-- task: CmdLine@2
-  name: apply
-  inputs:
-    script: 'terraform apply -auto-approve'
+    command: 'init'
+
+- script: |
+    echo "Running Terraform Plan"
+    export GITHUB_TOKEN=$GITHUB_TOKEN
+    terraform plan
+  displayName: 'Terraform Plan'
+
+- script: |
+    echo "Running Terraform Apply"
+    export GITHUB_TOKEN=$GITHUB_TOKEN
+    terraform apply -auto-approve
+  displayName: 'Terraform Apply'
